@@ -21,14 +21,6 @@ pipeline {
         }
    
         
-        stage('Build Image For Docker ') {
-            steps {
-                script{
-                    gv.BuildImageForDocker()
-                }
-              }
-            }
-        
         stage('deploy App'){
             steps{
                 script{

@@ -14,12 +14,12 @@ pipeline {
         stage('Build') {
             steps {
                 script{
-                    gv.BuildImageForDocker()
+                    gv.build()
                 }   
             }
         }
         
-        stage('BuildImageForDocker ') {
+        stage('Build Image For Docker ') {
             steps {
                 script{
                     gv.BuildImageForDocker()
@@ -28,7 +28,7 @@ pipeline {
             }
         }
         
-        stage('deployApp'){
+        stage('deploy App'){
             steps{
                 script{
                     gv.deployApp()
@@ -37,3 +37,4 @@ pipeline {
         }
 
     }
+}

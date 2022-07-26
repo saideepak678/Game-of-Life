@@ -1,44 +1,38 @@
-CODE_CHANGES = getGitChanges()
+def gv
 pipeline {
-    
-  agent any
-
+    agent any
     stages {
-          
-      stage('Build') {
+  
+        stage('init') {
             steps {
-              echo 'building the application'
+             gv=load "script.groovy"
             }
         }
-    
-      stage('test') {
-          when {
-              expression {
-                  BRANCH_NAME== 'master' ||BRANCH_NAME == 'dev'
+        
+        stage('Build') {
+            steps {
+                script{
+                    gv.BuildImageForDocker()
+                }   
+            }
+        }
+        
+        stage('BuildImageForDocker ') {
+            steps {
+                script{
+                    gv.BuildImageForDocker()
+                }
               }
-              
-          }
-            steps {
-              echo 'testing the application'
             }
         }
-      
-      stage('deploy') {
-            steps {
-               echo 'deploy the application'
+        
+        stage('deployApp'){
+            steps{
+                script{
+                    gv.deployApp()
+                }
             }
         }
-    
-    }
-    post {
-        always{
-            echo 'always send the mail kind things'
-        }
-        failure {
-            echo 'failure the command'
-        }
-        success{
-            echo 'success'
-        } 
+
     }
 }

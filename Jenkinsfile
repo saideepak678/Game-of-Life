@@ -1,3 +1,4 @@
+CODE_CHANGES = getGitChanges()
 pipeline {
     
   agent any
@@ -11,6 +12,12 @@ pipeline {
         }
     
       stage('test') {
+          when {
+              expression {
+                  BRANCH_NAME== 'master' ||BRANCH_NAME == 'dev'
+              }
+              
+          }
             steps {
               echo 'testing the application'
             }
@@ -22,5 +29,16 @@ pipeline {
             }
         }
     
+    }
+    post {
+        always{
+            echo 'always send the mail kind things'
+        }
+        failure {
+            echo 'failure the command'
+        }
+        success{
+            echo 'success'
+        } 
     }
 }

@@ -5,9 +5,10 @@ def buildJar() {
 
 def deployApp() {
     
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd //opt/tomcat/tomcat/bin/
-                ./catalina.sh start''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//opt/tomcat/tomcat/webapps', remoteDirectorySDF: false, removePrefix: 'gameoflife-web/target', sourceFiles: 'gameoflife-web/target/gameoflife.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-   
+       sshagent(['deploy-test']) {
+ 	sh "scp -o StrictHostKeyChecking=no gameoflife-web/target/gameoflife.war ubuntu@52.70.227.62:/opt/tomcat/tomcat/webapps"
+ 	sh "//opt/tomcat/tomcat/bin/startup.sh start"
+ 	}
 } 
 
 return this

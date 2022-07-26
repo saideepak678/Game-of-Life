@@ -5,10 +5,12 @@ def buildJar() {
 
 def deployApp() {
     
-       sshagent(['deploy-test']) {
- 	sh "scp -o StrictHostKeyChecking=no gameoflife-web/target/gameoflife.war ubuntu@52.70.227.62:/opt/tomcat/tomcat/webapps"
- 	sh "//opt/tomcat/tomcat/bin/startup.sh start"
- 	}
+       withCredentials([usernamePassword(credentialsId: 'Docker-login', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+              sh "docker rmi -f dsai83436/tomcatup"
+              sh "docker build -t dsai83436/tomcatup -f gameoflife-web/Dockerfile ."
+              sh "echo $PASS | docker login -u $USER --password-stdin"
+              sh "docker push dsai83436/tomcatup"
+              }
 } 
 
 return this

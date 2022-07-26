@@ -2,11 +2,6 @@
 pipeline {
     agent any
     stages {
-        stage('Source code management') {
-            steps {
-              git 'https://github.com/saideepak678/Game-of-Life.git'
-             }
-        }
         
         stage('Build') {
             steps {

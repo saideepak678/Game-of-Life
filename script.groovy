@@ -1,4 +1,4 @@
-def buildJar() {
+def buildWar() {
     echo "building the application..."
     sh 'mvn clean install'
 } 

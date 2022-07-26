@@ -19,7 +19,7 @@ pipeline {
                 }   
             }
         }
-    }
+   
         
         stage('Build Image For Docker ') {
             steps {
@@ -38,4 +38,4 @@ pipeline {
         }
 
     }
-
+}

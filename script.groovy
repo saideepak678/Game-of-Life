@@ -1,6 +1,6 @@
 def build() {
     echo "building the application..."
-    sh 'mvn package'
+    sh 'mvn clean install'
 } 
 
 def BuildImageForDocker() {

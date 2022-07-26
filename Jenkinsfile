@@ -10,7 +10,7 @@ pipeline {
                 }
             }
         }
-        stage("build jar") {
+        stage("build war") {
             steps {
                 script {
                     //echo "building jar"
